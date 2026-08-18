@@ -70,6 +70,166 @@ namespace MeinGame.ViewModel
                 // Kehrt den Wert um (True wird False, False wird True)
                 angeklickterWuerfel.IstGesperrt = !angeklickterWuerfel.IstGesperrt;
             }
+
+
+        [RelayCommand]
+        public void ErgebnisEintragen(string kategorie)
+        {
+            // 1. Darf überhaupt eingetragen werden? (Es muss mindestens 1x gewürfelt worden sein)
+            if (WurfZaehler == 0) return;
+
+            // 2. Wer ist gerade am Zug?
+            var aktuellerSpieler = IsPlayerOneTurn ? Spieler1 : Spieler2;
+
+            // 3. Eintragen je nach ausgewählter Kategorie
+            switch (kategorie)
+            {
+                case "Einser":
+                    // Nur eintragen, wenn das Feld noch leer (null) ist
+                    if (aktuellerSpieler.Einser == null)
+                    {
+                        aktuellerSpieler.Einser = BerechneObereReihe(1);
+                        ZugBeenden();
+                    }
+                    break;
+
+                case "Zweier":
+                    if (aktuellerSpieler.Zweier == null)
+                    {
+                        aktuellerSpieler.Zweier = BerechneObereReihe(2);
+                        ZugBeenden();
+                    }
+                    break;
+
+                case "Dreier":
+                    if (aktuellerSpieler.Dreier == null)
+                    {
+                        aktuellerSpieler.Dreier = BerechneObereReihe(3);
+                        ZugBeenden();
+                    }
+                    break;
+
+                case "Vierer":
+                    if (aktuellerSpieler.Vierer == null)
+                    {
+                        aktuellerSpieler.Vierer = BerechneObereReihe(3);
+                        ZugBeenden();
+                    }
+                    break;
+
+                case "Fuenfer":
+                    if (aktuellerSpieler.Fuenfer == null)
+                    {
+                        aktuellerSpieler.Fuenfer = BerechneObereReihe(3);
+                        ZugBeenden();
+                    }
+                    break;
+
+                case "Sechser":
+                    if (aktuellerSpieler.Sechser == null)
+                    {
+                        aktuellerSpieler.Sechser = BerechneObereReihe(3);
+                        ZugBeenden();
+                    }
+                    break;
+
+
+
+
+            }
+        }
+
+
+
+
+        // Hilfsmethode, um die Punkte für Einser bis Sechser zu berechnen
+        private int BerechneObereReihe(int augenzahl)
+        {
+            int summe = 0;
+
+            // Wir gehen alle 5 Würfel durch
+            foreach (var wuerfel in WuerfelListe)
+            {
+                // Wenn der Würfel die gesuchte Augenzahl zeigt, addieren wir sie zur Summe
+                if (wuerfel.Wert == augenzahl)
+                {
+                    summe += augenzahl;
+                }
+            }
+
+            return summe;
+
+            // Profi-Tipp: Mit LINQ ließe sich das sogar in einer einzigen Zeile schreiben:
+            // return WuerfelListe.Where(w => w.Wert == augenzahl).Sum(w => w.Wert);
+        }
+
+
+        // Beendet den Zug, resettet die Würfel und wechselt den Spieler
+        private void ZugBeenden()
+        {
+            // 1. Zähler zurücksetzen
+            WurfZaehler = 0;
+
+            // 2. Alle Würfel wieder freigeben und optisch auf 1 stellen
+            foreach (var wuerfel in WuerfelListe)
+            {
+                wuerfel.IstGesperrt = false;
+                wuerfel.Wert = 1;
+            }
+
+            // 3. Spieler wechseln (True wird False, False wird True)
+            IsPlayerOneTurn = !IsPlayerOneTurn;
+        }
+
+        [RelayCommand]
+        public void ErgebnisEintragen(string kategorie)
+        {
+            // 1. Darf überhaupt eingetragen werden? (Es muss mindestens 1x gewürfelt worden sein)
+            if (WurfZaehler == 0) return;
+
+            // 2. Wer ist gerade am Zug?
+            var aktuellerSpieler = IsPlayerOneTurn ? Spieler1 : Spieler2;
+
+            // 3. Eintragen je nach ausgewählter Kategorie
+            switch (kategorie)
+            {
+                case "Einser":
+                    // Nur eintragen, wenn das Feld noch leer (null) ist
+                    if (aktuellerSpieler.Einser == null)
+                    {
+                        aktuellerSpieler.Einser = BerechneObereReihe(1);
+                        ZugBeenden();
+                    }
+                    break;
+
+                case "Zweier":
+                    if (aktuellerSpieler.Zweier == null)
+                    {
+                        aktuellerSpieler.Zweier = BerechneObereReihe(2);
+                        ZugBeenden();
+                    }
+                    break;
+
+                case "Dreier":
+                    if (aktuellerSpieler.Dreier == null)
+                    {
+                        aktuellerSpieler.Dreier = BerechneObereReihe(3);
+                        ZugBeenden();
+                    }
+                    break;
+
+
+                case "Vierer":
+                    if (aktuellerSpieler.Vierer == null)
+                    {
+                        aktuellerSpieler.Vierer = BerechneObereReihe(3);
+                        ZugBeenden();
+                    }
+                    break;
+                    // TODO: Vierer, Fuenfer, Sechser exakt nach dem gleichen Muster...
+            }
+        }
+
     }
 }
 
