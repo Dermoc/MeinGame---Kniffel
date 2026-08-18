@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="MeinGame.View.StartseitePage"
+    xmlns="http://schemas.microsoft.com/dotnet/maui/global"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://schemas.microsoft.com/dotnet/maui/global/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:MeinGame.View"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        
+        
+        
+        
+        
+        <Grid RowDefinitions="*,*"
+              ColumnDefinitions="*,*"
+              Background="Beige">
+
+
+            
+            
+            <!--Start des Spiels-->
+            <Border 
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Background="Aqua"
+                    StrokeThickness="3"
+                    StrokeShape="25">
+
+                <Button x:Name="btnStartGame"
+                        Text="Spiel starten"
+                        TextColor="Black"
+                        Clicked="btnStartGame_Clicked">
+                        
+                    
+                </Button>
+                
+            </Border>
+
+
+            <Border 
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Background="Aqua"
+                    StrokeThickness="3"
+                    StrokeShape="25">
+
+                <Button Text="Button2"
+                        TextColor="Black">
+
+                </Button>
+
+            </Border>
+
+            <Border 
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Background="Aqua"
+                    StrokeThickness="3"
+                    StrokeShape="25">
+
+                <Button Text="Button3"
+                        TextColor="Black">
+
+                </Button>
+
+            </Border>
+
+            <Border 
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Background="Aqua"
+                    StrokeThickness="3"
+                    StrokeShape="25">
+
+                <Button Text="Button14"
+                        TextColor="Black">
+
+                </Button>
+
+            </Border>
+
+
+
+
+
+
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
