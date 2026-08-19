@@ -30,29 +30,33 @@ namespace MeinGame.Model
         [ObservableProperty] private int? _chance;
 
         // ==========================================
-        // BERECHNETE EIGENSCHAFTEN & SUMMEN
+        // BERECHNETE SUMMEN & BONUS
         // ==========================================
 
-        // Gibt true zurück, wenn alle 13 Felder einen Wert (ungleich null) haben
+        // Summe 1er bis 6er
+        public int GesamtOben => (Einser ?? 0) + (Zweier ?? 0) + (Dreier ?? 0) +
+                                 (Vierer ?? 0) + (Fuenfer ?? 0) + (Sechser ?? 0);
+
+        // 35 Zusatzpunkte ab genau 63 Punkten im oberen Teil
+        public int Bonus => GesamtOben >= 63 ? 35 : 0;
+
+        // Summe oberer Teil inklusive Bonus
+        public int GesamtObenMitBonus => GesamtOben + Bonus;
+
+        // Summe unterer Teil
+        public int GesamtUnten => (DreierPasch ?? 0) + (ViererPasch ?? 0) + (FullHouse ?? 0) +
+                                  (KleineStrasse ?? 0) + (GrosseStrasse ?? 0) + (JepJep ?? 0) + (Chance ?? 0);
+
+        // Gesamtergebnis des Spielers
+        public int Endsumme => GesamtObenMitBonus + GesamtUnten;
+
+        // Prüft, ob alle 13 Felder ausgefüllt sind
         public bool IstVollstaendig =>
             Einser != null && Zweier != null && Dreier != null &&
             Vierer != null && Fuenfer != null && Sechser != null &&
             DreierPasch != null && ViererPasch != null && FullHouse != null &&
             KleineStrasse != null && GrosseStrasse != null && JepJep != null &&
             Chance != null;
-
-        public int GesamtOben => (Einser ?? 0) + (Zweier ?? 0) + (Dreier ?? 0) +
-                                 (Vierer ?? 0) + (Fuenfer ?? 0) + (Sechser ?? 0);
-
-        public int Bonus => GesamtOben >= 63 ? 35 : 0;
-
-        public int GesamtUnten => (DreierPasch ?? 0) + (ViererPasch ?? 0) + (FullHouse ?? 0) +
-                                  (KleineStrasse ?? 0) + (GrosseStrasse ?? 0) + (JepJep ?? 0) + (Chance ?? 0);
-
-        public int Endsumme => GesamtOben + Bonus + GesamtUnten;
-
-        // Alias für Endsumme (falls im ViewModel 'Gesamtpunkte' aufgerufen wird)
-        public int Gesamtpunkte => Endsumme;
 
 
         // ==========================================
@@ -62,19 +66,19 @@ namespace MeinGame.Model
         {
             base.OnPropertyChanged(e);
 
-            // Verhindert rekursive Endlosschleifen beim Feuern der berechneten Werte
+            // Wenn irgendein Wertungsfeld geändert wurde, aktualisieren wir sofort alle Summen in der GUI
             if (e.PropertyName != nameof(GesamtOben) &&
                 e.PropertyName != nameof(Bonus) &&
+                e.PropertyName != nameof(GesamtObenMitBonus) &&
                 e.PropertyName != nameof(GesamtUnten) &&
                 e.PropertyName != nameof(Endsumme) &&
-                e.PropertyName != nameof(Gesamtpunkte) &&
                 e.PropertyName != nameof(IstVollstaendig))
             {
                 OnPropertyChanged(nameof(GesamtOben));
                 OnPropertyChanged(nameof(Bonus));
+                OnPropertyChanged(nameof(GesamtObenMitBonus));
                 OnPropertyChanged(nameof(GesamtUnten));
                 OnPropertyChanged(nameof(Endsumme));
-                OnPropertyChanged(nameof(Gesamtpunkte));
                 OnPropertyChanged(nameof(IstVollstaendig));
             }
         }

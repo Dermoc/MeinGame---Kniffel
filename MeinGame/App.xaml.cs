@@ -7,6 +7,9 @@ namespace MeinGame
         public App()
         {
             InitializeComponent();
+
+            UserAppTheme = AppTheme.Light;
+
         }
 
         protected override Window CreateWindow(IActivationState? activationState)
