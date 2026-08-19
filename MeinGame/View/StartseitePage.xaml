@@ -7,85 +7,86 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:MeinGame.View"
     mc:Ignorable="d">
+
     <ContentPage.Content>
-        
-        
-        
-        
-        
         <Grid RowDefinitions="*,*"
               ColumnDefinitions="*,*"
-              Background="Beige">
+              Background="Beige"
+              Padding="10"
+              RowSpacing="10"
+              ColumnSpacing="10">
 
-
-            
-            
-            <!--Start des Spiels-->
-            <Border 
-                    Grid.Row="0"
+            <!-- FELD 1 (Oben Links): Start des Spiels -->
+            <Border Grid.Row="0"
                     Grid.Column="0"
                     Background="Aqua"
                     StrokeThickness="3"
-                    StrokeShape="25">
+                    StrokeShape="RoundRectangle 25">
 
                 <Button x:Name="btnStartGame"
                         Text="Spiel starten"
                         TextColor="Black"
-                        Clicked="btnStartGame_Clicked">
-                        
-                    
-                </Button>
-                
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Clicked="btnStartGame_Clicked" />
             </Border>
 
-
-            <Border 
-                    Grid.Row="0"
+            <!-- FELD 2 (Oben Rechts): NAMENSEINGABE FÜR SPIELER 1 & 2 -->
+            <Border Grid.Row="0"
                     Grid.Column="1"
                     Background="Aqua"
                     StrokeThickness="3"
-                    StrokeShape="25">
+                    StrokeShape="RoundRectangle 25"
+                    Padding="15">
 
-                <Button Text="Button2"
-                        TextColor="Black">
+                <VerticalStackLayout Spacing="8" VerticalOptions="Center">
+                    <Label Text="Spieler-Namen"
+                           FontAttributes="Bold"
+                           FontSize="16"
+                           TextColor="Black"
+                           HorizontalOptions="Center" />
 
-                </Button>
+                    <!-- Eingabe Spieler 1 -->
+                    <Entry x:Name="txtPlayer1"
+                           Text="Spieler 1"
+                           Placeholder="Name Spieler 1"
+                           TextColor="Black"
+                           BackgroundColor="White" />
 
+                    <!-- Eingabe Spieler 2 -->
+                    <Entry x:Name="txtPlayer2"
+                           Text="Spieler 2"
+                           Placeholder="Name Spieler 2"
+                           TextColor="Black"
+                           BackgroundColor="White" />
+                </VerticalStackLayout>
             </Border>
 
-            <Border 
-                    Grid.Row="1"
+            <!-- FELD 3 (Unten Links): STATISTIK / HISTORIE -->
+            <Border Grid.Row="1"
                     Grid.Column="0"
                     Background="Aqua"
                     StrokeThickness="3"
-                    StrokeShape="25">
+                    StrokeShape="RoundRectangle 25">
 
-                <Button Text="Button3"
-                        TextColor="Black">
-
-                </Button>
-
+                <Button x:Name="btnStatistik"
+                        Text="Statistik"
+                        TextColor="Black"
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Clicked="btnStatistik_Clicked" />
             </Border>
 
-            <Border 
-                    Grid.Row="1"
+            <!-- FELD 4 (Unten Rechts) -->
+            <Border Grid.Row="1"
                     Grid.Column="1"
                     Background="Aqua"
                     StrokeThickness="3"
-                    StrokeShape="25">
+                    StrokeShape="RoundRectangle 25">
 
-                <Button Text="Button14"
-                        TextColor="Black">
-
-                </Button>
-
+                <Button Text="Beenden"
+                        TextColor="Black" />
             </Border>
-
-
-
-
-
-
 
         </Grid>
     </ContentPage.Content>

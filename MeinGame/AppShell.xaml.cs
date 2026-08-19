@@ -12,6 +12,7 @@ namespace MeinGame
 
             Routing.RegisterRoute(nameof(StartseitePage), typeof(StartseitePage));
             Routing.RegisterRoute(nameof(GameplayPage), typeof(GameplayPage));
+            Routing.RegisterRoute(nameof(StatistikPage), typeof(StatistikPage));
         }
     }
 }

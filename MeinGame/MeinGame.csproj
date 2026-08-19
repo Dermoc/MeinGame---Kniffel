@@ -72,14 +72,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Service\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <MauiXaml Update="View\GameplayPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\StartseitePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\StatistikPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

@@ -1,9 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 
 namespace MeinGame.Model
 {
@@ -12,8 +8,9 @@ namespace MeinGame.Model
         [ObservableProperty]
         private string _playerName = string.Empty;
 
-        //Die Spielkarte des Spielers
-
+        // ==========================================
+        // OBERER TEIL (1er bis 6er)
+        // ==========================================
         [ObservableProperty] private int? _einser;
         [ObservableProperty] private int? _zweier;
         [ObservableProperty] private int? _dreier;
@@ -21,7 +18,9 @@ namespace MeinGame.Model
         [ObservableProperty] private int? _fuenfer;
         [ObservableProperty] private int? _sechser;
 
-        // Unterer Teil
+        // ==========================================
+        // UNTERER TEIL (Kombinationen)
+        // ==========================================
         [ObservableProperty] private int? _dreierPasch;
         [ObservableProperty] private int? _viererPasch;
         [ObservableProperty] private int? _fullHouse;
@@ -30,7 +29,18 @@ namespace MeinGame.Model
         [ObservableProperty] private int? _jepJep;
         [ObservableProperty] private int? _chance;
 
-        // Berechnete Eigenschaften
+        // ==========================================
+        // BERECHNETE EIGENSCHAFTEN & SUMMEN
+        // ==========================================
+
+        // Gibt true zurück, wenn alle 13 Felder einen Wert (ungleich null) haben
+        public bool IstVollstaendig =>
+            Einser != null && Zweier != null && Dreier != null &&
+            Vierer != null && Fuenfer != null && Sechser != null &&
+            DreierPasch != null && ViererPasch != null && FullHouse != null &&
+            KleineStrasse != null && GrosseStrasse != null && JepJep != null &&
+            Chance != null;
+
         public int GesamtOben => (Einser ?? 0) + (Zweier ?? 0) + (Dreier ?? 0) +
                                  (Vierer ?? 0) + (Fuenfer ?? 0) + (Sechser ?? 0);
 
@@ -41,23 +51,32 @@ namespace MeinGame.Model
 
         public int Endsumme => GesamtOben + Bonus + GesamtUnten;
 
-        // Fängt JEDE Änderung an irgendeinem Feld zentral ab:
+        // Alias für Endsumme (falls im ViewModel 'Gesamtpunkte' aufgerufen wird)
+        public int Gesamtpunkte => Endsumme;
+
+
+        // ==========================================
+        // AUTOMATISCHE UI-AKTUALISIERUNG
+        // ==========================================
         protected override void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
 
-            // Wenn sich ein Feld geändert hat, die Summen einmal für die UI aktualisieren
+            // Verhindert rekursive Endlosschleifen beim Feuern der berechneten Werte
             if (e.PropertyName != nameof(GesamtOben) &&
                 e.PropertyName != nameof(Bonus) &&
                 e.PropertyName != nameof(GesamtUnten) &&
-                e.PropertyName != nameof(Endsumme))
+                e.PropertyName != nameof(Endsumme) &&
+                e.PropertyName != nameof(Gesamtpunkte) &&
+                e.PropertyName != nameof(IstVollstaendig))
             {
                 OnPropertyChanged(nameof(GesamtOben));
                 OnPropertyChanged(nameof(Bonus));
                 OnPropertyChanged(nameof(GesamtUnten));
                 OnPropertyChanged(nameof(Endsumme));
+                OnPropertyChanged(nameof(Gesamtpunkte));
+                OnPropertyChanged(nameof(IstVollstaendig));
             }
         }
-
     }
 }

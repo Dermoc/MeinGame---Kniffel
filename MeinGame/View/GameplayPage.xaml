@@ -21,83 +21,149 @@
                 <Grid ColumnDefinitions="*,*,*"
                       RowDefinitions="Auto,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*">
 
-                    <!-- Tabellenkopf (Zeile 0) -->
-                    <Border Grid.Row="0" Grid.Column="0">
-                        <Label Text="Kategorie" FontAttributes="Bold"/>
+                    <!-- ZEILE 0: TABELLENKOPF MIT AKTIV-HERVORHEBUNG -->
+                    <Border Grid.Row="0" Grid.Column="0" BackgroundColor="#EFEFEF">
+                        <Label Text="Kategorie" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
                     </Border>
-                    <Border Grid.Row="0" Grid.Column="1">
-                        <Label Text="{Binding Spieler1.PlayerName}" FontAttributes="Bold"/>
+
+                    <!-- Spieler 1 Header -->
+                    <Border Grid.Row="0" Grid.Column="1" StrokeShape="RoundRectangle 4">
+                        <Border.Triggers>
+                            <DataTrigger TargetType="Border" Binding="{Binding IsPlayerOneTurn}" Value="True">
+                                <Setter Property="BackgroundColor" Value="#D4EDDA"/>
+                                <Setter Property="Stroke" Value="#28A745"/>
+                                <Setter Property="StrokeThickness" Value="2"/>
+                            </DataTrigger>
+                            <DataTrigger TargetType="Border" Binding="{Binding IsPlayerOneTurn}" Value="False">
+                                <Setter Property="BackgroundColor" Value="Transparent"/>
+                                <Setter Property="Stroke" Value="LightGray"/>
+                                <Setter Property="StrokeThickness" Value="1"/>
+                            </DataTrigger>
+                        </Border.Triggers>
+                        <Label Text="{Binding Spieler1.PlayerName}" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
                     </Border>
-                    <Border Grid.Row="0" Grid.Column="2">
-                        <Label Text="{Binding Spieler2.PlayerName}" FontAttributes="Bold"/>
+
+                    <!-- Spieler 2 Header -->
+                    <Border Grid.Row="0" Grid.Column="2" StrokeShape="RoundRectangle 4">
+                        <Border.Triggers>
+                            <DataTrigger TargetType="Border" Binding="{Binding IsPlayerOneTurn}" Value="False">
+                                <Setter Property="BackgroundColor" Value="#D4EDDA"/>
+                                <Setter Property="Stroke" Value="#28A745"/>
+                                <Setter Property="StrokeThickness" Value="2"/>
+                            </DataTrigger>
+                            <DataTrigger TargetType="Border" Binding="{Binding IsPlayerOneTurn}" Value="True">
+                                <Setter Property="BackgroundColor" Value="Transparent"/>
+                                <Setter Property="Stroke" Value="LightGray"/>
+                                <Setter Property="StrokeThickness" Value="1"/>
+                            </DataTrigger>
+                        </Border.Triggers>
+                        <Label Text="{Binding Spieler2.PlayerName}" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
                     </Border>
 
                     <!-- EINSER (Zeile 1) -->
                     <Border Grid.Row="1" Grid.Column="0">
-                        <Label Text="1"/>
+                        <Label Text="1er"/>
                     </Border>
                     <Border Grid.Row="1" Grid.Column="1">
-                        <Label Text="{Binding Spieler1.Einser}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="Einser" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler1.Einser}" HorizontalTextAlignment="Center"/>
                     </Border>
                     <Border Grid.Row="1" Grid.Column="2">
-                        <Label Text="{Binding Spieler2.Einser}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="Einser" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler2.Einser}" HorizontalTextAlignment="Center"/>
                     </Border>
 
                     <!-- ZWEIER (Zeile 2) -->
                     <Border Grid.Row="2" Grid.Column="0">
-                        <Label Text="2"/>
+                        <Label Text="2er"/>
                     </Border>
                     <Border Grid.Row="2" Grid.Column="1">
-                        <Label Text="{Binding Spieler1.Zweier}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="Zweier" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler1.Zweier}" HorizontalTextAlignment="Center"/>
                     </Border>
                     <Border Grid.Row="2" Grid.Column="2">
-                        <Label Text="{Binding Spieler2.Zweier}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="Zweier" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler2.Zweier}" HorizontalTextAlignment="Center"/>
                     </Border>
 
                     <!-- DREIER (Zeile 3) -->
                     <Border Grid.Row="3" Grid.Column="0">
-                        <Label Text="3"/>
+                        <Label Text="3er"/>
                     </Border>
                     <Border Grid.Row="3" Grid.Column="1">
-                        <Label Text="{Binding Spieler1.Dreier}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="Dreier" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler1.Dreier}" HorizontalTextAlignment="Center"/>
                     </Border>
                     <Border Grid.Row="3" Grid.Column="2">
-                        <Label Text="{Binding Spieler2.Dreier}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="Dreier" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler2.Dreier}" HorizontalTextAlignment="Center"/>
                     </Border>
 
                     <!-- VIERER (Zeile 4) -->
                     <Border Grid.Row="4" Grid.Column="0">
-                        <Label Text="4"/>
+                        <Label Text="4er"/>
                     </Border>
                     <Border Grid.Row="4" Grid.Column="1">
-                        <Label Text="{Binding Spieler1.Vierer}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="Vierer" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler1.Vierer}" HorizontalTextAlignment="Center"/>
                     </Border>
                     <Border Grid.Row="4" Grid.Column="2">
-                        <Label Text="{Binding Spieler2.Vierer}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="Vierer" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler2.Vierer}" HorizontalTextAlignment="Center"/>
                     </Border>
 
                     <!-- FÜNFER (Zeile 5) -->
                     <Border Grid.Row="5" Grid.Column="0">
-                        <Label Text="5"/>
+                        <Label Text="5er"/>
                     </Border>
                     <Border Grid.Row="5" Grid.Column="1">
-                        <Label Text="{Binding Spieler1.Fuenfer}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="Fuenfer" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler1.Fuenfer}" HorizontalTextAlignment="Center"/>
                     </Border>
                     <Border Grid.Row="5" Grid.Column="2">
-                        <Label Text="{Binding Spieler2.Fuenfer}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="Fuenfer" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler2.Fuenfer}" HorizontalTextAlignment="Center"/>
                     </Border>
 
                     <!-- SECHSER (Zeile 6) -->
                     <Border Grid.Row="6" Grid.Column="0">
-                        <Label Text="6"/>
+                        <Label Text="6er"/>
                     </Border>
                     <Border Grid.Row="6" Grid.Column="1">
-                        <Label Text="{Binding Spieler1.Sechser}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="Sechser" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler1.Sechser}" HorizontalTextAlignment="Center"/>
                     </Border>
                     <Border Grid.Row="6" Grid.Column="2">
-                        <Label Text="{Binding Spieler2.Sechser}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="Sechser" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler2.Sechser}" HorizontalTextAlignment="Center"/>
                     </Border>
-
+                    
+                    
+                    
                     <!-- GESAMT OBEN (Zeile 7) -->
                     <Border Grid.Row="7" Grid.Column="0">
                         <Label Text="Gesamt Oben" FontAttributes="Bold"/>
@@ -136,10 +202,16 @@
                         <Label Text="3er Pasch"/>
                     </Border>
                     <Border Grid.Row="10" Grid.Column="1">
-                        <Label Text="{Binding Spieler1.DreierPasch}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="DreierPasch" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler1.DreierPasch}" HorizontalTextAlignment="Center"/>
                     </Border>
                     <Border Grid.Row="10" Grid.Column="2">
-                        <Label Text="{Binding Spieler2.DreierPasch}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="DreierPasch" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler2.DreierPasch}" HorizontalTextAlignment="Center"/>
                     </Border>
 
                     <!-- 4ER PASCH (Zeile 11) -->
@@ -147,10 +219,16 @@
                         <Label Text="4er Pasch"/>
                     </Border>
                     <Border Grid.Row="11" Grid.Column="1">
-                        <Label Text="{Binding Spieler1.ViererPasch}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="ViererPasch" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler1.ViererPasch}" HorizontalTextAlignment="Center"/>
                     </Border>
                     <Border Grid.Row="11" Grid.Column="2">
-                        <Label Text="{Binding Spieler2.ViererPasch}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="ViererPasch" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler2.ViererPasch}" HorizontalTextAlignment="Center"/>
                     </Border>
 
                     <!-- FULL HOUSE (Zeile 12) -->
@@ -158,10 +236,16 @@
                         <Label Text="Full House"/>
                     </Border>
                     <Border Grid.Row="12" Grid.Column="1">
-                        <Label Text="{Binding Spieler1.FullHouse}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="FullHouse" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler1.FullHouse}" HorizontalTextAlignment="Center"/>
                     </Border>
                     <Border Grid.Row="12" Grid.Column="2">
-                        <Label Text="{Binding Spieler2.FullHouse}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="FullHouse" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler2.FullHouse}" HorizontalTextAlignment="Center"/>
                     </Border>
 
                     <!-- KL. STRASSE (Zeile 13) -->
@@ -169,10 +253,16 @@
                         <Label Text="Kl. Strasse"/>
                     </Border>
                     <Border Grid.Row="13" Grid.Column="1">
-                        <Label Text="{Binding Spieler1.KleineStrasse}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="KleineStrasse" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler1.KleineStrasse}" HorizontalTextAlignment="Center"/>
                     </Border>
                     <Border Grid.Row="13" Grid.Column="2">
-                        <Label Text="{Binding Spieler2.KleineStrasse}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="KleineStrasse" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler2.KleineStrasse}" HorizontalTextAlignment="Center"/>
                     </Border>
 
                     <!-- GR. STRASSE (Zeile 14) -->
@@ -180,10 +270,16 @@
                         <Label Text="Gr. Strasse"/>
                     </Border>
                     <Border Grid.Row="14" Grid.Column="1">
-                        <Label Text="{Binding Spieler1.GrosseStrasse}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="GrosseStrasse" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler1.GrosseStrasse}" HorizontalTextAlignment="Center"/>
                     </Border>
                     <Border Grid.Row="14" Grid.Column="2">
-                        <Label Text="{Binding Spieler2.GrosseStrasse}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="GrosseStrasse" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler2.GrosseStrasse}" HorizontalTextAlignment="Center"/>
                     </Border>
 
                     <!-- JEPJEP (Zeile 15) -->
@@ -191,10 +287,16 @@
                         <Label Text="JepJep"/>
                     </Border>
                     <Border Grid.Row="15" Grid.Column="1">
-                        <Label Text="{Binding Spieler1.JepJep}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="JepJep" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler1.JepJep}" HorizontalTextAlignment="Center"/>
                     </Border>
                     <Border Grid.Row="15" Grid.Column="2">
-                        <Label Text="{Binding Spieler2.JepJep}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="JepJep" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler2.JepJep}" HorizontalTextAlignment="Center"/>
                     </Border>
 
                     <!-- CHANCE (Zeile 16) -->
@@ -202,10 +304,16 @@
                         <Label Text="Chance"/>
                     </Border>
                     <Border Grid.Row="16" Grid.Column="1">
-                        <Label Text="{Binding Spieler1.Chance}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="Chance" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler1.Chance}" HorizontalTextAlignment="Center"/>
                     </Border>
                     <Border Grid.Row="16" Grid.Column="2">
-                        <Label Text="{Binding Spieler2.Chance}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ErgebnisEintragenCommand}" CommandParameter="Chance" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Spieler2.Chance}" HorizontalTextAlignment="Center"/>
                     </Border>
 
                     <!-- GESAMT UNTEN (Zeile 17) -->
@@ -235,85 +343,81 @@
 
 
 
-            <Grid Grid.Column="1"
-                  RowDefinitions="*,*">
+            <!-- RECHTE SEITE: Statusanzeige, Würfel und Button -->
+            <Grid Grid.Column="1" RowDefinitions="Auto, *, Auto" Margin="10">
 
-                <!-- RECHTE SEITE: Würfel und Button -->
-                <Grid Grid.Column="1" RowDefinitions="Auto, *, Auto" Margin="10">
+                <!-- 1. Status-Infokarte -->
+                <Border Grid.Row="0"
+                        Stroke="#CCCCCC"
+                        StrokeShape="RoundRectangle 8"
+                        BackgroundColor="#F8F9FA"
+                        Padding="12"
+                        Margin="0,0,0,10">
+                    <VerticalStackLayout Spacing="4">
+                        <HorizontalStackLayout HorizontalOptions="Center" Spacing="6">
+                            <Label Text="Am Zug:" FontSize="14" TextColor="Gray"/>
+                            <Label Text="{Binding AktuellerSpielerName}" FontSize="16" FontAttributes="Bold" TextColor="#28A745"/>
+                        </HorizontalStackLayout>
 
-                    <!-- 1. Überschrift -->
-                    <Label Grid.Row="0"
-                       Text="Würfel und Ergebnisse"
-                       FontAttributes="Bold"
-                       HorizontalOptions="Center"
-                       Margin="0,0,0,20" />
+                        <Label Text="{Binding WurfStatusText}" 
+                               FontSize="18" 
+                               FontAttributes="Bold" 
+                               HorizontalOptions="Center" 
+                               TextColor="Black"/>
 
-                    <!-- 2. Die 5 Würfel (werden aus der WuerfelListe generiert) -->
-                    <HorizontalStackLayout Grid.Row="1"
+                        <Label Text="{Binding VerbleibendeWuerfeText}" 
+                               FontSize="12" 
+                               HorizontalOptions="Center" 
+                               TextColor="Gray"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- 2. Die 5 Würfel -->
+                <HorizontalStackLayout Grid.Row="1"
                                        BindableLayout.ItemsSource="{Binding WuerfelListe}"
                                        Spacing="10"
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center">
-
-                        <BindableLayout.ItemTemplate>
-                            <DataTemplate>
-                                <!-- Das Design für EINEN einzelnen Würfel -->
-                                <Border WidthRequest="60" 
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Border WidthRequest="60" 
                                     HeightRequest="60" 
                                     Stroke="Black" 
                                     StrokeThickness="2"
                                     StrokeShape="RoundRectangle 8">
-
-                                    <!-- Klick-Erkennung für das Sperren -->
-                                    <Border.GestureRecognizers>
-                                        <TapGestureRecognizer 
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer 
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameplayViewModel}}, Path=WuerfelSperrenCommand}"
                                         CommandParameter="{Binding .}" />
-                                    </Border.GestureRecognizers>
-
-                                    <!-- Farbwechsel, wenn der Würfel gesperrt wird -->
-                                    <Border.Triggers>
-                                        <DataTrigger TargetType="Border" Binding="{Binding IstGesperrt}" Value="True">
-                                            <Setter Property="BackgroundColor" Value="LightGray" />
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="Border" Binding="{Binding IstGesperrt}" Value="False">
-                                            <Setter Property="BackgroundColor" Value="White" />
-                                        </DataTrigger>
-                                    </Border.Triggers>
-
-                                    <!-- Anzeige der Würfel-Zahl -->
-                                    <Label Text="{Binding Wert}" 
+                                </Border.GestureRecognizers>
+                                <Border.Triggers>
+                                    <DataTrigger TargetType="Border" Binding="{Binding IstGesperrt}" Value="True">
+                                        <Setter Property="BackgroundColor" Value="LightGray" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Border" Binding="{Binding IstGesperrt}" Value="False">
+                                        <Setter Property="BackgroundColor" Value="White" />
+                                    </DataTrigger>
+                                </Border.Triggers>
+                                <Label Text="{Binding Wert}" 
                                        FontSize="28" 
                                        FontAttributes="Bold" 
                                        TextColor="Black"
                                        HorizontalOptions="Center" 
                                        VerticalOptions="Center" />
-                                </Border>
-                            </DataTemplate>
-                        </BindableLayout.ItemTemplate>
-                    </HorizontalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </HorizontalStackLayout>
 
-                    <!-- 3. Der Würfeln-Button (MVVM konform) -->
-                    <Button Grid.Row="2"
+                <!-- 3. Der Würfeln-Button -->
+                <Button Grid.Row="2"
                         Text="Würfeln"
                         Command="{Binding WuerfelnCommand}"
                         Background="BlanchedAlmond"
                         TextColor="Black"
                         FontAttributes="Bold"
                         HeightRequest="50" />
-                </Grid>
             </Grid>
-
-
-
-
-
-
-
-
-
-
-
         </Grid>
     </ContentPage.Content>
 </ContentPage>

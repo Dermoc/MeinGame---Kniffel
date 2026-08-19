@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/maui/global"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MeinGame.View.StatistikPage"
+             Title="Spiel-Historie">
+
+    <Grid RowDefinitions="Auto, *" Padding="15" RowSpacing="10">
+        <Label Text="Bisherige Spiele" 
+               FontSize="22" 
+               FontAttributes="Bold" 
+               HorizontalOptions="Center" />
+
+        <CollectionView x:Name="cvHistorie" Grid.Row="1">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Stroke="#CCCCCC" 
+                            StrokeShape="RoundRectangle 8" 
+                            Padding="12" 
+                            Margin="0,0,0,8" 
+                            BackgroundColor="White">
+                        <VerticalStackLayout Spacing="3">
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="{Binding DatumFormatiert}" FontSize="12" TextColor="Gray"/>
+                                <Label Text="•" FontSize="12" TextColor="Gray"/>
+                                <Label Text="{Binding Gewinner, StringFormat='Sieger: {0}'}" FontAttributes="Bold" TextColor="#28A745"/>
+                            </HorizontalStackLayout>
+                            <Label Text="{Binding ErgebnisText}" FontSize="15" TextColor="Black"/>
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.EmptyView>
+                <Label Text="Noch keine Spiele abgeschlossen." 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center" 
+                       TextColor="Gray" />
+            </CollectionView.EmptyView>
+        </CollectionView>
+    </Grid>
+</ContentPage>
